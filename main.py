@@ -48,7 +48,7 @@ def get_articles():
     return list(articles.keys())
 
 
-@app.route("/", methods = ["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == 'POST': 
         text_to_summary = request.form.get('text_to_summary')
