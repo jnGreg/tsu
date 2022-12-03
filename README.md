@@ -1,9 +1,9 @@
 # txt_sum_up_proj
 
 ##  Project Description
-A simple REST API app to summarize texts given in the form of a URL or pasted.
-Only wikipedia articles addressed by URL are being handled rather well at the current state of development. Feel free to experiment with other sources. We take no responsibility. 
-Max text length is 1024 chars as of now. It works slow enough anyway, trust us.
+A simple REST API app to summarize texts given in the form of a URL or pasted.<br>
+Only wikipedia articles addressed by URL are being handled rather well at the current state of development. Feel free to experiment with other sources. We take no responsibility. <br>
+Max text length is 1024 chars as of now. It works slow enough anyway, trust us.<br>
 
 ## Technologies
 - [Python] - Web programming language, version 3.9
