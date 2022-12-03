@@ -37,11 +37,7 @@ def get_wiki_article(url):
     wiki_article = ''
     for p in all_ps:
         wiki_article += p.text
-    print(f'before:{wiki_article}')
-    if len(wiki_article) > 1024:
-        wiki_article = wiki_article[0:1023]
-    print(f'after:{wiki_article}')
-    return wiki_article
+    return wiki_article if len(wiki_article) < 1024 else wiki_article[0:1023]
 
 
 class Article(Resource):
