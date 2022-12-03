@@ -5,9 +5,9 @@ name: tsu
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "feature_api" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "feature_api" ]
 
 permissions:
   contents: read
