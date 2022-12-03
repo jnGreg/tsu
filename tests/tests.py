@@ -67,4 +67,3 @@ def test_answer():
     assert inc(4) == 5
     assert read_article(1) == articles[1]
     assert True if article_id_not_found(-1) else False
-
