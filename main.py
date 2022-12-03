@@ -11,7 +11,7 @@ api = Api(app)
 
 def abort_if_article_id_not_found(article_id):
     if article_id not in articles:
-        abort(404, message="Article not found")
+        return abort(404, message="Article not found")
 
 
 def make_text_summary(text_to_summary) -> str:

@@ -1,6 +1,6 @@
 import pytest
 
-from main import abort_if_article_id_not_found
+from flask_restful import abort
 
 
 def inc(x):
@@ -49,5 +49,5 @@ def article_id_not_found(article_id):
 
 
 def article_not_found_answer():
-    return abort_if_article_id_not_found(-1)
+    return abort(404, message="Article not found")
 
