@@ -14,8 +14,8 @@
         <h4>Paste text to summarize</h4>
         <form method="POST">
             <!--gotta connect that with api via javascript-->
-            <textarea id="text_to_summary" type = 'text' name="text_to_summary" rows="10" cols="80" placeholder="Enter text..">{{text_to_summary}}</textarea>
-            <p>Max length: [2137]</p>
+            <textarea id="text_to_summary" type = 'text' name="text_to_summary" rows="10" cols="80" maxlength="1024" placeholder="Enter text..">{{text_to_summary}}</textarea>
+            <p>Max length: [1024]</p>
             <h4>Or paste a URL to article</h4>
             <textarea id="url_to_summary" type = 'text' name="url_to_summary" rows="1" cols="80" placeholder="https://..">{{url_to_summary}}</textarea>
             <br><br>

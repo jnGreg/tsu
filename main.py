@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_restful import Api, Resource, reqparse, abort
+from bs4 import BeautifulSoup
+import requests
 # import flask sqlalchemy
 from transformers import pipeline
 from texts import *
@@ -25,6 +27,21 @@ def make_text_summary(text_to_summary) -> str:
 
 article_put_agrs = reqparse.RequestParser()
 article_put_agrs.add_argument('content', type=str, help='Content')
+
+
+def get_wiki_article(url):
+    req_obj = requests.get(url)
+    text = req_obj.text
+    soup = BeautifulSoup(text)
+    all_ps = soup.find_all("p")
+    wiki_article = ''
+    for p in all_ps:
+        wiki_article += p.text
+    print(f'before:{wiki_article}')
+    if len(wiki_article) > 1024:
+        wiki_article = wiki_article[0:1023]
+    print(f'after:{wiki_article}')
+    return wiki_article
 
 
 class Article(Resource):
@@ -61,7 +78,8 @@ def index():
             text_to_summary = request.form.get('text_to_summary')
             summary = make_text_summary(text_to_summary)
         elif request.form['text_to_summary'] == '' and request.form['url_to_summary'] != '':
-            text_to_summary = "tutaj wyswietlam przypomnienie ze trzeba zrobic metode do url!"
+            print(request.form.get('url_to_summary'))
+            text_to_summary = get_wiki_article(request.form.get('url_to_summary'))
             summary = make_text_summary(text_to_summary)
         else:
             text_to_summary = "tutaj else (oba wypelnione lub puste)"
