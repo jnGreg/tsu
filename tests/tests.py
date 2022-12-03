@@ -49,5 +49,5 @@ def article_id_not_found(article_id):
 
 
 def article_not_found_answer():
-    return abort(404, message="Article not found")
+    assert article_id_not_found(-1) == abort(404, message="Article not found")
 
