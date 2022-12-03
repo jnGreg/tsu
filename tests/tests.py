@@ -3,14 +3,6 @@ import pytest
 from flask_restful import abort
 
 
-def inc(x):
-    return x + 1
-
-
-def test_answer():
-    assert inc(4) == 5
-
-
 def read_article(article_id):
     return article_id == 1
 
