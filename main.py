@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify
-from flask_restful import Api, Resource, reqparse
+from flask_restful import Api, Resource, reqparse, abort
 from transformers import pipeline
 from texts import *
 
@@ -9,8 +9,12 @@ app = Flask(__name__)
 api = Api(app)
 
 
+def abort_if_article_id_not_found(article_id):
+    if article_id not in articles:
+        abort(404, message="Article not found")
+
+
 def make_text_summary(text_to_summary) -> str:
-    
     summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
     summary = summarizer(text_to_summary, max_length=130, min_length=30)
@@ -24,6 +28,7 @@ article_put_agrs.add_argument('content', type=str, help='Content')
 
 class Article(Resource):
     def get(self, article_id):
+        abort_if_article_id_not_found(article_id)
         return jsonify({'orginal': articles[article_id]}) 
 
     def put(self, article_id):
