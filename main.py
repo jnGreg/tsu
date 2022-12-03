@@ -21,7 +21,7 @@ def make_text_summary(text_to_summary) -> str:
 article_put_agrs = reqparse.RequestParser()
 article_put_agrs.add_argument('content', type=str, help='Content')
 
-# here to add def to get article from url
+
 class Article(Resource):
     def get(self, article_id):
         return jsonify({'orginal': articles[article_id]}) 
