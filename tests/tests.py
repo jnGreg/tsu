@@ -1,5 +1,7 @@
 import pytest
 
+from main import abort_if_article_id_not_found
+
 
 def inc(x):
     return x + 1
@@ -41,7 +43,11 @@ REST APIs listen for HTTP methods like GET, POST, and DELETE to know which opera
 
 While there are many HTTP methods, the five methods listed below are the most commonly used with REST APIs:"""
 
-"""
-def article_id_not_found():
-    return 
-"""
+
+def article_id_not_found(article_id):
+    return article_id == -1
+
+
+def article_not_found_answer():
+    return abort_if_article_id_not_found(-1)
+
