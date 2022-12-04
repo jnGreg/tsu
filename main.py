@@ -50,6 +50,10 @@ class Article(Resource):
         articles[article_id] = args
         return articles[article_id]
 
+    def delete(self, article_id):
+        del articles[article_id]
+        return '', 204
+
 
 class Summary(Resource):
     def get(self, article_id):
