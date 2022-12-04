@@ -5,6 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 from bs4 import BeautifulSoup
 import requests
 from transformers import pipeline
+
+import texts
 from texts import *
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -15,7 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Article(db.Model):
+class ArticleM(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     article = db.Column(db.String(1024), nullable=False)
     summary = db.Column(db.String(130), nullable=True)
@@ -28,9 +30,11 @@ class Article(db.Model):
         return f"article {self.id}: {self.article}, summary: {self.summary}"
 
 
+"""with app.app_context():  # check for wether it already exists
+    db.create_all() """
+db.init_app(app)
 with app.app_context():
     db.create_all()
-
 
 text_to_summary = ''
 output = ''
@@ -114,21 +118,21 @@ def get_summaries():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == 'POST':
+    if request.method == 'POST' and (request.form['text_to_summary'] != '' or request.form['url_to_summary'] != ''):
+        text_to = ''
         if request.form['text_to_summary'] != '' and request.form['url_to_summary'] == '':
-            text_to_summary = request.form.get('text_to_summary')
-            summary = make_text_summary(text_to_summary)
+            text_to = request.form.get('text_to_summary')
         elif request.form['text_to_summary'] == '' and request.form['url_to_summary'] != '':
-            print(request.form.get('url_to_summary'))
-            text_to_summary = get_wiki_article(request.form.get('url_to_summary'))
-            summary = make_text_summary(text_to_summary)
-        else:
-            text_to_summary = "tutaj else (oba wypelnione lub puste)"
-            summary = make_text_summary(text_to_summary)
-        return render_template('index.html', output=summary, text_to_summary=text_to_summary)
-
-    return render_template('index.html')
+            text_to = get_wiki_article(request.form.get('url_to_summary'))
+        summary = make_text_summary(text_to)
+        a = ArticleM(article=text_to, summary=summary)
+        db.session.add(a)
+        db.session.commit()
+        return render_template('index.html', output=summary, text_to_summary=text_to)
+    else:
+        return render_template('index.html')
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
