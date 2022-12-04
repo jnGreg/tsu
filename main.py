@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_restful import Api, Resource, reqparse, abort
 from flask_sqlalchemy import SQLAlchemy
@@ -6,10 +7,11 @@ import requests
 from transformers import pipeline
 from texts import *
 
-
+basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 api = Api(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'articles.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
@@ -18,12 +20,17 @@ class Article(db.Model):
     article = db.Column(db.String(1024), nullable=False)
     summary = db.Column(db.String(130), nullable=True)
 
+    def __init__(self, article, summary):
+        self.article = article
+        self.summary = summary
+
     def __repr__(self):
         return f"article {self.id}: {self.article}, summary: {self.summary}"
 
 
 with app.app_context():
     db.create_all()
+
 
 text_to_summary = ''
 output = ''
