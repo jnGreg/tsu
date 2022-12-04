@@ -9,20 +9,18 @@ from texts import *
 
 app = Flask(__name__)
 api = Api(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
 db = SQLAlchemy(app)
 
 
-class ArticleModel(db.Model):
+class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     article = db.Column(db.String(1024), nullable=False)
     summary = db.Column(db.String(130), nullable=True)
-    """
-    def __repr__(self):
-        return f"Article(original article = {article}, summary = {summary})" """
 
 
-# db.create_all()
+with app.app_context():
+    db.create_all()
 
 text_to_summary = ''
 output = ''
