@@ -18,6 +18,9 @@ class Article(db.Model):
     article = db.Column(db.String(1024), nullable=False)
     summary = db.Column(db.String(130), nullable=True)
 
+    def __repr__(self):
+        return f"article {self.id}: {self.article}, summary: {self.summary}"
+
 
 with app.app_context():
     db.create_all()
