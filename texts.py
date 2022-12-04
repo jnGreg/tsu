@@ -1,4 +1,4 @@
-articles={
+articles = {
 
 0: """New York (CNN)When Liana Barrientos was 23 years old, she got married in Westchester County, New York.
 A year later, she got married again in Westchester County, but to a different man and without divorcing her first husband.
@@ -56,6 +56,22 @@ The best known natural language processing tool is GPT-3, from OpenAI, which use
 For businesses, the three areas where GPT-3 has appeared most promising are writing, coding, and discipline-specific reasoning. OpenAI, the Microsoft-funded creator of GPT-3, has developed a GPT-3-based language model intended to act as an assistant for programmers by generating code from natural language input. This tool, Codex, is already powering products like Copilot for Microsoft’s subsidiary GitHub and is capable of creating a basic video game simply by typing instructions. This transformative capability was already expected to change the nature of how programmers do their jobs, but models continue to improve — the latest from Google’s DeepMind AI lab, for example, demonstrates the critical thinking and logic skills necessary to outperform most humans in programming competitions.
 
 Models like GPT-3 are considered to be foundation models — an emerging AI research area — which also work for other types of data such as images and video. Foundation models can even be trained on multiple forms of data at the same time, like OpenAI’s DALL·E 2, which is trained on language and images to generate high-resolution renderings of imaginary scenes or objects simply from text prompts. Due to their potential to transform the nature of cognitive work, economists expect that foundation models may affect every part of the economy and could lead to increases in economic growth similar to the industrial revolution."""
+
+
+}
+
+summaries = {
+
+0: """Liana Barrientos, now 39, is facing two criminal counts of "offering a false instrument for filing in the first degree" Prosecutors said the marriages were part of an immigration scam.""",
+
+
+
+
+1: """REST stands for representational state transfer and is a software architecture style that defines a pattern for client and server communications over a network. REST provides a set of constraints for software architecture to promote performance, scalability, simplicity, and reliability.""",
+
+
+
+2: """The best known natural language processing tool is GPT-3, from OpenAI. It uses AI and statistics to predict the next word in a sentence based on the preceding words. The latest version, called InstructGPT, has been fine-tuned by humans."""
 
 
 }
