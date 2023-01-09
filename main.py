@@ -128,8 +128,8 @@ def index():
         a = ArticleM(article=text_to, summary=summary)
         db.session.add(a)
         db.session.commit()
-        api.add_resource(text_to, "/articles/<int:article_id>")
-        api.add_resource(Summary, "/summaries/<int:summary_id>")
+        #api.add_resource(text_to, "/articles/<int:article_id>")
+        #api.add_resource(Summary, "/summaries/<int:summary_id>")
         return render_template('index.html', output=summary, text_to_summary=text_to, article_id=a.id)
     else:
         return render_template('index.html')
@@ -146,5 +146,5 @@ def get_full(art_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
 
+    app.run(debug=True)
