@@ -39,6 +39,7 @@ output = ''
 
 articles = []
 summaries = []
+art_ids = []
 
 #for obj in db:
 #    print(obj.article[0])
@@ -132,22 +133,27 @@ def index():
         a = ArticleM(article=text_to, summary=summary)
         db.session.add(a)
         db.session.commit()
+        if not art_ids:
+            art_id = 0
+        else:
+            art_id = max(art_ids)+1
+        art_ids.append(art_id)
         articles.append(text_to)
         summaries.append(summary)
         #api.add_resource(Summary, "/summaries/<int:summary_id>")
-        return render_template('index.html', output=summary, text_to_summary=text_to, article_id=a.id)
+        return render_template('index.html', output=summary, text_to_summary=text_to, article_id=art_id)
     else:
         return render_template('index.html')
 
 
 @app.route("/view")
-def sprecify():
+def specify():
     return f"please specify full view number in the link as in view/number"
 
 
 @app.route("/view/<int:art_id>")
 def get_full(art_id):
-    return jsonify({'article id': art_id, 'original text': articles[art_id], 'summary': summaries[art_id]})
+    return jsonify({'article id': art_ids[art_id], 'original text': articles[art_id], 'summary': summaries[art_id]})
 
 
 if __name__ == "__main__":
