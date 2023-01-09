@@ -6,8 +6,6 @@ from bs4 import BeautifulSoup
 import requests
 from transformers import pipeline
 
-import texts
-from texts import *
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -38,6 +36,12 @@ with app.app_context():
 
 text_to_summary = ''
 output = ''
+
+articles = []
+summaries = []
+
+#for obj in db:
+#    print(obj.article[0])
 
 
 def abort_if_article_id_not_found(article_id):
@@ -108,12 +112,12 @@ api.add_resource(Summary, "/summaries/<int:summary_id>")
 
 @app.get("/articles")
 def get_articles():
-    return list(articles.keys())
+    return list(articles)
 
 
 @app.get("/summaries")
 def get_summaries():
-    return list(summaries.keys())
+    return list(summaries)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -128,7 +132,8 @@ def index():
         a = ArticleM(article=text_to, summary=summary)
         db.session.add(a)
         db.session.commit()
-        #api.add_resource(text_to, "/articles/<int:article_id>")
+        articles.append(text_to)
+        summaries.append(summary)
         #api.add_resource(Summary, "/summaries/<int:summary_id>")
         return render_template('index.html', output=summary, text_to_summary=text_to, article_id=a.id)
     else:
