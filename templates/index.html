@@ -13,7 +13,6 @@
         <br>
         <h4>Paste text to summarize</h4>
         <form method="POST">
-            <!--gotta connect that with api via javascript-->
             <textarea id="text_to_summary" type = 'text' name="text_to_summary" rows="10" cols="80" maxlength="1024" placeholder="Enter text..">{{text_to_summary}}</textarea>
             <p>Max length: [1024]</p>
             <h4>Or paste a URL to article</h4>
@@ -25,8 +24,13 @@
 
         <h3>Output</h3>
         <textarea readonly id="output_text"  type = 'text' name="output_text" rows="8" cols="80" placeholder="Submit text for summarization..">{{output}}</textarea>
+         <a id="article_id" href="/view/{{article_id}}"> View request {{article_id}} summarison </a>
     </div>
 </body>
+<script>
+
+
+</script>
 </html>
 
 
