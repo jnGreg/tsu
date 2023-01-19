@@ -4,8 +4,6 @@ from flask_restful import Api, Resource, reqparse, abort
 from flask_sqlalchemy import SQLAlchemy
 from bs4 import BeautifulSoup
 import requests
-# from transformers import pipeline
-# from gensim.summarization.summarizer import summarize
 from summarizer import summarize
 
 
