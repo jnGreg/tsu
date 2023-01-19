@@ -1,10 +1,11 @@
 import os
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request,  jsonify
 from flask_restful import Api, Resource, reqparse, abort
+# from flask_restful_swagger import swagger
 from flask_sqlalchemy import SQLAlchemy
 from bs4 import BeautifulSoup
 import requests
-from summarizer import summarize
+# from summarizer import summarize
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
