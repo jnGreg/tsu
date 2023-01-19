@@ -1,0 +1,83 @@
+swagger: "2.0"
+info:
+  title: "My API"
+  version: "1.0"
+paths:
+  /articles/{article_id}:
+    get:
+      summary: Get an article by ID
+      parameters:
+        - name: article_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+        404:
+          description: Article not found
+
+    put:
+      summary: Update an article by ID
+      parameters:
+        - name: article_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+        404:
+          description: Article not found
+
+    delete:
+      summary: Delete an article by ID
+      parameters:
+        - name: article_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        204:
+          description: Success
+        404:
+          description: Article not found
+  /summaries/{summary_id}:
+    get:
+      summary: Get a summary by ID
+      parameters:
+        - name: summary_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+        404:
+          description: Summary not found
+
+    put:
+      summary: Update a summary by ID
+      parameters:
+        - name: summary_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+        404:
+          description: Summary not found
+
+    delete:
+      summary: Delete a summary by ID
+      parameters:
+        - name: summary_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        204:
+          description: Success
+        404:
+          description: Summary not found
