@@ -4,7 +4,9 @@ from flask_restful import Api, Resource, reqparse, abort
 from flask_sqlalchemy import SQLAlchemy
 from bs4 import BeautifulSoup
 import requests
-from transformers import pipeline
+# from transformers import pipeline
+# from gensim.summarization.summarizer import summarize
+from summarizer import summarize
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -51,11 +53,11 @@ def abort_if_article_id_not_found(article_id):
 
 
 def make_text_summary(text_to_summary) -> str:
-    summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-
-    summary = summarizer(text_to_summary, max_length=130, min_length=30)
-
-    return summary[0]['summary_text']
+    try: 
+        summary=" ".join(summarize(text_to_summary[:10],text_to_summary))
+    except:
+        summary='There is a problem with creating summary '
+    return summary
 
 
 article_put_agrs = reqparse.RequestParser()
